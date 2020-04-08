@@ -122,7 +122,8 @@ func TestTrackDetailsFromSDP(t *testing.T) {
 						Media: "video",
 					},
 					Attributes: []sdp.Attribute{
-						{Key: "ssrc", Value: "5000 cname:video_stream_guid"},
+						{Key: "msid", Value: "video_stream_id video_trk_id"},
+						{Key: "ssrc", Value: "5000"},
 					},
 				},
 			},
@@ -155,7 +156,8 @@ func TestTrackDetailsFromSDP(t *testing.T) {
 		} else {
 			assert.Equal(t, RTPCodecTypeVideo, track.kind)
 			assert.Equal(t, uint32(5000), track.ssrc)
-			assert.Equal(t, "video_stream_guid", track.id)
+			assert.Equal(t, "video_trk_id", track.id)
+			assert.Equal(t, "video_stream_id", track.label)
 		}
 	})
 }
