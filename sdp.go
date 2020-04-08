@@ -71,7 +71,9 @@ func trackDetailsFromSDP(log logging.LeveledLogger, s *sdp.SessionDescription) m
 
 				trackID := ""
 				trackLabel := ""
-				if len(split) == 3 && strings.HasPrefix(split[1], "msid:") {
+				if len(split) == 2 && strings.HasPrefix(split[1], "cname:") {
+					trackID = split[1][len("cname:"):]
+				} else if len(split) == 3 && strings.HasPrefix(split[1], "msid:") {
 					trackLabel = split[1][len("msid:"):]
 					trackID = split[2]
 				}
